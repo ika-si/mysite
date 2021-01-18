@@ -1,0 +1,33 @@
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% block head %}
+
+<title>Diary</title>
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/diary.css' %}">
+
+{% endblock head %}
+
+{% block body %}
+
+<div class="row row-eq-height">
+{% for post in posts %}
+    <div class="col-md-4 col-sm-4 col-xs-12 block">
+        <div class="context">
+          <div class="kiji">
+            <h1><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h1>
+            <p class="subheading">{{ post.date_posted|date:'y/n/j H:i' }}</p>
+
+            <ul class="aboutul">
+                <li> <i class="fa fa-check"></i>{{ post.content|linebreaks|urlize }}</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+{% endfor %}
+
+</div>
+
+{% endblock body %}
